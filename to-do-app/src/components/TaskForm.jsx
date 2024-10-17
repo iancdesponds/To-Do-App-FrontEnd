@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { TextField, Button, Box } from '@mui/material';
+import { motion } from 'framer-motion';
 
 function TaskForm({ onCreateTask }) {
   const [title, setTitle] = useState('');
@@ -12,22 +14,39 @@ function TaskForm({ onCreateTask }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input 
-        type="text" 
-        value={title} 
-        onChange={(e) => setTitle(e.target.value)} 
-        placeholder="Título" 
-        required 
-      />
-      <textarea 
-        value={description} 
-        onChange={(e) => setDescription(e.target.value)} 
-        placeholder="Descrição" 
-        required 
-      />
-      <button type="submit">Criar Tarefa</button>
-    </form>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        sx={{ display: 'flex', flexDirection: 'column', maxWidth: 600, margin: '0 auto', mb: 4 }}
+      >
+        <TextField
+          label="Título"
+          variant="outlined"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+          sx={{ mb: 2 }}
+        />
+        <TextField
+          label="Descrição"
+          variant="outlined"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
+          multiline
+          rows={4}
+          sx={{ mb: 2 }}
+        />
+        <Button type="submit" variant="contained" color="primary">
+          Criar Tarefa
+        </Button>
+      </Box>
+    </motion.div>
   );
 }
 

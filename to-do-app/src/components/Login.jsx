@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../api';
+import { Button, TextField, Typography, Box } from '@mui/material';
+import { motion } from 'framer-motion';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -12,34 +14,66 @@ function Login() {
     e.preventDefault();
     const token = await login(username, password);
     if (token) {
-      localStorage.setItem('jwt_token', token); // Armazenar o token
-      navigate('/'); // Redirecionar para a tela principal
+      localStorage.setItem('jwt_token', token);
+      navigate('/');
     } else {
       setError('Login falhou. Verifique suas credenciais.');
     }
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <h2>Login</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <input
-        type="text"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder="Usuário"
-        required
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Senha"
-        required
-      />
-      <button type="submit">Login</button>
-      <button type="button" onClick={() => navigate('/cadastro')}>Criar uma nova conta</button>
-    </form>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <Box
+        component="form"
+        onSubmit={handleLogin}
+        sx={{ display: 'flex', flexDirection: 'column', maxWidth: 400, margin: '0 auto', mt: 4 }}
+      >
+        <Typography variant="h4" component="h2" gutterBottom>
+          Login
+        </Typography>
+
+        <TextField
+          label="Usuário"
+          variant="outlined"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+          sx={{ mb: 2 }}
+        />
+        <TextField
+          label="Senha"
+          type="password"
+          variant="outlined"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          sx={{ mb: 2 }}
+        />
+
+        {/* Mensagem de erro acima dos botões */}
+        {error && <Typography color="error" sx={{ mb: 2 }}>{error}</Typography>}
+
+        <Button type="submit" variant="contained" color="primary" sx={{ mb: 2 }}>
+          Login
+        </Button>
+        <Button
+            onClick={() => navigate('/cadastro')}
+            variant="text"
+            sx={{
+                color: 'black',
+                '&:hover': {
+                color: 'white',
+                },
+            }}
+        >
+          Criar uma nova conta
+        </Button>
+      </Box>
+    </motion.div>
   );
 }
 
