@@ -2,6 +2,9 @@
 
 Este projeto é a interface de usuário para o gerenciamento de tarefas (**To-Do List**) desenvolvido com **Vite** e **ReactJS**. Ele se conecta a uma API de back-end que gerencia as tarefas, permitindo aos usuários criar, listar, atualizar e excluir tarefas. A aplicação também inclui autenticação via **JWT** para proteger as rotas.
 
+##### [Link para o Backend ->](https://github.com/iancdesponds/To-Do-App)
+
+
 ## Funcionalidades
 
 - **Autenticação de Usuário**:
@@ -50,8 +53,8 @@ Este projeto é a interface de usuário para o gerenciamento de tarefas (**To-Do
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/seu-repositorio-frontend.git
-   cd seu-repositorio-frontend
+   git clone https://github.com/iancdesponds/To-Do-App-FrontEnd.git
+   cd to-do-app
    ```
 
 2. Instale as dependências:
@@ -61,8 +64,9 @@ Este projeto é a interface de usuário para o gerenciamento de tarefas (**To-Do
 
 3. Crie um arquivo `.env` com a variável de ambiente para a URL da API (back-end):
    ```
-   VITE_API_URL=https://seu-backend-url.com
+   VITE_API_URL=http://localhost:8000
    ```
+   Atualmente está rodando apenas localmente, verificar seção de deploy.
 
 4. Inicie o servidor de desenvolvimento:
    ```bash
@@ -73,18 +77,19 @@ Este projeto é a interface de usuário para o gerenciamento de tarefas (**To-Do
 
 ## Deploy
 
-Este projeto foi implantado utilizando a **Vercel**, e está disponível publicamente. O deploy contínuo está configurado, de modo que toda alteração no código no GitHub dispara um novo build e deploy automaticamente.
+Este projeto foi implantado utilizando a **Vercel** para o front-end, mas **não inclui o deploy do back-end**. Isso significa que, embora a interface esteja disponível publicamente, ela **não funcionará corretamente sem um back-end ativo**.
 
-## Configuração de Variáveis de Ambiente na Vercel
+Para que o site funcione, você precisará ter uma instância do back-end rodando, seja localmente ou em um serviço de hospedagem de APIs. O front-end utiliza o back-end para todas as operações relacionadas a tarefas (criação, atualização, exclusão) e autenticação, por isso é essencial que o back-end esteja acessível.
 
-Antes de fazer o deploy na Vercel, certifique-se de adicionar as seguintes variáveis de ambiente:
+### Como fazer o site funcionar:
 
-- `VITE_API_URL`: URL da API do back-end (ex.: https://seu-backend-url.com)
+1. **Opção 1: Rodar o back-end localmente**  
+   - Certifique-se de que o back-end está rodando em sua máquina.
+   - Atualize a variável de ambiente `VITE_API_URL` no arquivo `.env` com o endereço local do back-end (geralmente `http://localhost:8000` ou outro porto que você tenha configurado).
 
-Para adicionar variáveis de ambiente:
-1. Acesse o painel da Vercel.
-2. Navegue até o projeto.
-3. Vá para **Settings** > **Environment Variables** e adicione a variável `VITE_API_URL`.
+2. **Opção 2: Fazer o deploy do back-end**  
+   - Utilize uma plataforma de hospedagem de APIs (como Heroku, Render ou AWS) para fazer o deploy do back-end.
+   - Após o deploy, atualize a variável `VITE_API_URL` com a URL da API hospedada para que o front-end possa se comunicar com o back-end.
 
 ## Estrutura do Projeto
 
